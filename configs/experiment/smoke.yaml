@@ -1,0 +1,41 @@
+project: semopkt-anonymous-smoke
+model_config: ../model/smoke_semopkt.yaml
+baseline_config: ../baseline/baselines.yaml
+datasets:
+  Synthetic:
+    processed: ../../data/processed/Synthetic/interactions.csv
+output_root: ../../runs
+manifest_root: ../../data/manifests
+embedding_root: ../../data/embeddings
+seeds: [202601]
+train_sizes: [8]
+data_efficiency_sizes: [4, 8]
+holdout_ratios: [0.20]
+inducing_sizes: [8]
+query_sizes: [16, 32]
+student_split:
+  test_fraction: 0.20
+  validation_fraction_of_development: 0.15
+unseen_concept:
+  minimum_students: 4
+  minimum_interactions: 8
+  minimum_positive: 2
+  minimum_negative: 2
+  cluster_initializations: 2
+  first_encounter_only: true
+models: [DKT, SemOpKT]
+experiments: [E1]
+statistics:
+  bootstrap_resamples: 100
+  confidence_level: 0.95
+  ece_bins: 10
+  multiple_comparison: holm
+propagation:
+  maximum_lag: 3
+  minimum_pair_observations: 2
+  maximum_model_states: 10
+hardware_timing:
+  warmup: 2
+  repetitions: 5
+  batch_size: 1
+  sequence_length: 20

@@ -1,0 +1,34 @@
+dataset: NIPS34
+raw_globs:
+  - train_task_3_4.csv
+  - "*.csv"
+separator: ","
+column_aliases:
+  student_id: [UserId, user_id, student_id, user]
+  question_id: [QuestionId, question_id, problem_id, item_id]
+  kc_id: [SubjectIdLevel3, SubjectId, subject_id, skill_id, kc_id]
+  kc_text: [SubjectName, subject_name, skill_name, kc_text, concept_name]
+  correct: [IsCorrect, is_correct, correct, label]
+  timestamp: [DateAnswered, timestamp, AnswerId, answer_id, order_id]
+nips_metadata:
+  answer_metadata: answer_metadata_task_3_4.csv
+  question_metadata: question_metadata_task_3_4.csv
+  subject_metadata: subject_metadata.csv
+  answer_key: AnswerId
+  question_key: QuestionId
+  timestamp_column: DateAnswered
+  subject_id_column: SubjectId
+  subject_name_column: Name
+  subject_level_column: Level
+  target_subject_level: 3
+multi_kc_delimiters: ["~~", ";", "|"]
+multi_kc_joiner: " [SEP] "
+minimum_student_interactions: 6
+maximum_student_interactions: 50
+expected_raw_statistics:
+  students: 4918
+  interactions: 1382727
+  questions: 948
+  concepts: 57
+  median_interactions_per_student: 239
+  median_concepts_per_student: 26

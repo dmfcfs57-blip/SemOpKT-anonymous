@@ -1,0 +1,93 @@
+models:
+  BKT:
+    family: probabilistic
+    hidden_size: 64
+  DKT:
+    family: recurrent
+    cell: lstm
+    hidden_size: 128
+    layers: 1
+    dropout: 0.20
+  DKVMN:
+    family: memory
+    hidden_size: 128
+    memory_slots: 64
+    memory_value_size: 128
+    dropout: 0.20
+  AKT:
+    family: attention
+    hidden_size: 128
+    layers: 2
+    heads: 8
+    dropout: 0.20
+    distance_bias: exponential
+  simpleKT:
+    family: attention
+    hidden_size: 128
+    layers: 2
+    heads: 8
+    dropout: 0.20
+    distance_bias: none
+  GKT:
+    family: graph
+    hidden_size: 128
+    graph_neighbors: 5
+    dropout: 0.20
+  csKT:
+    family: attention
+    hidden_size: 128
+    layers: 2
+    heads: 8
+    dropout: 0.20
+    distance_bias: cone_kernel
+  UKT:
+    family: uncertainty_recurrent
+    hidden_size: 128
+    layers: 1
+    monte_carlo_samples: 10
+    dropout: 0.20
+  SINKT:
+    family: semantic_recurrent
+    hidden_size: 192
+    layers: 1
+    dropout: 0.20
+  EAKT:
+    family: semantic_attribute
+    hidden_size: 192
+    layers: 1
+    dropout: 0.20
+  MAHKT:
+    family: multi_relation
+    hidden_size: 192
+    relation_heads: 4
+    dropout: 0.20
+  CLST:
+    family: semantic_transformer
+    hidden_size: 256
+    layers: 4
+    heads: 8
+    dropout: 0.20
+  MAML-KT:
+    family: meta_recurrent
+    hidden_size: 128
+    inner_steps: 3
+    inner_learning_rate: 1.0e-2
+    dropout: 0.20
+  DisenKT:
+    family: disentangled_domain
+    hidden_size: 192
+    shared_size: 96
+    private_size: 96
+    dropout: 0.20
+common_training:
+  optimizer: AdamW
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 64
+  max_epochs: 200
+  patience: 20
+  gradient_clip: 5.0
+  selection_metric: nll
+  precision: bf16
+  num_workers: 0
+  max_sequence_length: 50

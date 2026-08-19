@@ -1,0 +1,27 @@
+dataset: Algebra05
+raw_globs:
+  - "algebra_2005_2006*.txt"
+  - "*.txt"
+  - "*.tsv"
+separator: "\t"
+column_aliases:
+  student_id: [Anon Student Id, student_id, user_id]
+  question_id: [Problem Name, Step Name, problem_id, question_id]
+  kc_id: [KC(Default), KC(SubSkills), skill_id, kc_id]
+  kc_text: [KC(Default), KC(SubSkills), skill_name, kc_text]
+  correct: [Correct First Attempt, correct, label]
+  timestamp: [Step Start Time, First Transaction Time, timestamp, order_id]
+question_id_components:
+  - [Problem Name, problem_id, question_id]
+  - [Step Name, step_name]
+multi_kc_delimiters: ["~~", ";", "|"]
+multi_kc_joiner: " [SEP] "
+minimum_student_interactions: 6
+maximum_student_interactions: 50
+expected_raw_statistics:
+  students: 571
+  interactions: 607014
+  questions: 173113
+  concepts: 112
+  median_interactions_per_student: 580
+  median_concepts_per_student: 54

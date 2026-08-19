@@ -1,0 +1,73 @@
+project: semopkt-anonymous
+model_config: ../model/semopkt.yaml
+baseline_config: ../baseline/baselines.yaml
+datasets:
+  NIPS34:
+    config: ../data/nips34.yaml
+    processed: ../../data/processed/NIPS34/interactions.parquet
+  Algebra05:
+    config: ../data/algebra05.yaml
+    processed: ../../data/processed/Algebra05/interactions.parquet
+  Assist09:
+    config: ../data/assist09.yaml
+    processed: ../../data/processed/Assist09/interactions.parquet
+output_root: ../../runs
+manifest_root: ../../data/manifests
+embedding_root: ../../data/embeddings
+seeds: [202601, 202602, 202603, 202604, 202605, 202606, 202607, 202608, 202609, 202610]
+train_sizes: [8, 16, 32, 64]
+data_efficiency_sizes: [2, 4, 8, 16, 32, 64, 128]
+holdout_ratios: [0.10, 0.20, 0.30]
+inducing_sizes: [16, 32, 64, 128]
+query_sizes: [32, 64, 128, 256, 512]
+student_split:
+  test_fraction: 0.20
+  validation_fraction_of_development: 0.15
+unseen_concept:
+  minimum_students: 30
+  minimum_interactions: 100
+  minimum_positive: 20
+  minimum_negative: 20
+  cluster_initializations: 20
+  first_encounter_only: true
+models: [BKT, DKT, DKVMN, AKT, simpleKT, GKT, csKT, UKT, SINKT, EAKT, MAHKT, CLST, MAML-KT, DisenKT, SemOpKT]
+experiments: [E0, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11, E12, E13, E14, E15, E16, E17, E18, E19, E20]
+cross_domain_pairs:
+  - [Algebra05, NIPS34]
+  - [Assist09, NIPS34]
+  - [NIPS34, Algebra05]
+  - [Assist09, Algebra05]
+  - [NIPS34, Assist09]
+  - [Algebra05, Assist09]
+cross_domain:
+  support_fraction: 0.80
+  near_duplicate_cosine_threshold: 0.92
+  adaptation_training:
+    learning_rate: 3.0e-4
+    max_epochs: 50
+    patience: 10
+statistics:
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  ece_bins: 15
+  multiple_comparison: holm
+  comparison_models: [simpleKT, GKT, csKT, UKT, EAKT, MAHKT, CLST]
+hyperparameter_search:
+  learning_rates: [1.0e-4, 3.0e-4, 1.0e-3, 3.0e-3]
+  hidden_sizes: [64, 128, 256]
+  dropouts: [0.1, 0.2, 0.3, 0.5]
+  layers: [1, 2, 3, 4]
+  regularization: [0.0, 1.0e-5, 1.0e-4, 1.0e-3]
+  maximum_candidates: 24
+hardware_timing:
+  warmup: 20
+  repetitions: 100
+  batch_size: 1
+  sequence_length: 50
+propagation:
+  maximum_lag: 5
+  minimum_pair_observations: 20
+  maximum_model_states: 2000
+online_adaptation:
+  old_query_concepts: 16
+  maximum_stability_events: 1000

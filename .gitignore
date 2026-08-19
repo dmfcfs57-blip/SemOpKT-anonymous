@@ -1,0 +1,46 @@
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.venv/
+venv/
+build/
+dist/
+
+# Raw and derived data are not distributed.
+data/raw/*
+data/interim/*
+data/processed/*
+data/manifests/*
+data/embeddings/*
+data/reference/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/manifests/.gitkeep
+!data/embeddings/.gitkeep
+!data/reference/.gitkeep
+
+# Run products are regenerated from configurations.
+runs/*
+tables/generated/*
+figures/generated/*
+checksums/generated/*
+!runs/.gitkeep
+!tables/generated/.gitkeep
+!figures/generated/.gitkeep
+!checksums/generated/.gitkeep
+
+# Model caches and credentials must remain outside the repository.
+.cache/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.key
+*.pem
+.env

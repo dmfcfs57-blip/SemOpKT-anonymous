@@ -1,0 +1,67 @@
+name: SemOpKT
+text_encoder:
+  backend: sentence_transformers
+  model_id: sentence-transformers/all-mpnet-base-v2
+  revision: e8c3b32edf5434bc2275fc9bab85f82640a19130
+  license: Apache-2.0
+  max_length: 128
+  pooling: mean
+  normalize: true
+  instruction_prefix: ""
+  cache_normalization: unicode_nfkc_casefold_whitespace
+  finetuning: frozen
+  partial_unfrozen_layers: 2
+split_encoder:
+  backend: sentence_transformers
+  model_id: sentence-transformers/all-MiniLM-L6-v2
+  revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+  license: Apache-2.0
+  max_length: 128
+  pooling: mean
+  normalize: true
+dimensions:
+  text: 768
+  semantic: 64
+  field: 64
+  context: 256
+  attention: 64
+  response: 16
+  hidden: 512
+architecture:
+  inducing_points: 64
+  layers: 3
+  rank: 16
+  dropout: 0.20
+  interpolation_temperature: 1.0
+  learnable_temperature: true
+  direct_coordinate_path: true
+  response_conditioning: true
+  anchor_initialization: kmeans_plus_plus
+  trainable_anchors: true
+  trainable_concept_embeddings: false
+  normalize_anchors_after_step: true
+  population_prior_initialization: zeros
+  layer_sharing: false
+  epsilon: 1.0e-8
+regularization:
+  smoothness: 1.0e-3
+  stability: 1.0e-3
+  graph_neighbors: 5
+  graph_metric: cosine
+  graph_weight: rbf
+  graph_rbf_temperature: 0.10
+  graph_symmetrize: union_mean
+  graph_self_loops: false
+training:
+  optimizer: AdamW
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  batch_size: 64
+  max_epochs: 200
+  patience: 20
+  gradient_clip: 5.0
+  precision: bf16
+  deterministic: true
+  selection_metric: nll
+  num_workers: 0
+  max_sequence_length: 50
