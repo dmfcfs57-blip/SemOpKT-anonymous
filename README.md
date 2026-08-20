@@ -1,9 +1,11 @@
 # SemOpKT anonymous reproducibility repository
 
-This repository contains the data-processing, model, experiment, statistical,
-and reporting code for the anonymous SemOpKT submission. It intentionally
-contains no author names, affiliations, e-mail addresses, machine-specific
-paths, private dataset copies, pretrained weights, or submission identifiers.
+This repository accompanies the anonymous manuscript *SemOpKT: A
+Function-Valued Semantic State Model for Open-World Cold-Start Knowledge
+Tracing*. It contains the data-processing, model, experiment, statistical, and
+reporting code while intentionally excluding author names, affiliations,
+e-mail addresses, machine-specific paths, private dataset copies, pretrained
+weights, and submission identifiers.
 
 ## Reproducibility boundary
 
